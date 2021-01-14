@@ -1,0 +1,29 @@
+.App {
+    font-family: sans-serif;
+    text-align: center;
+  }
+  form {
+    padding: 45px;
+  }
+  .hidden {
+    display: none;
+  }
+  
+  label {
+    margin-top: 15px;
+    margin-bottom: 5px;
+  }
+  button {
+    margin-top: 30px;
+  }
+  .inline-errormsg {
+    color: red;
+    font-size: 12px;
+  }
+  
+  .card {
+    display:inline-block;
+    overflow: hidden;
+    transition: max-height 0.2s ease;
+
+  }
