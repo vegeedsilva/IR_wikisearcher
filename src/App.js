@@ -79,7 +79,7 @@ export class App extends React.Component {
                 contentType: 'application/json'
             } 
         },
-        maxScore: maxScore
+        maxScore: maxscore
     },
     body: formData,
     }).then(function(response){
