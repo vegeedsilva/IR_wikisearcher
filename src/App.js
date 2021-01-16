@@ -69,8 +69,8 @@ export class App extends React.Component {
   }
     // let url = "http://localhost:4500/updateRelevance"
     let url = "https://wikisearcher-app.herokuapp.com/updateRelevance"
-    // const proxyurl = "https://cors-anywhere.herokuapp.com/";
-    fetch((url), {
+    const proxyurl = "https://cors-anywhere.herokuapp.com/";
+    fetch((proxyurl+url), {
       method: 'POST',
       body: formData,
     }).then(function(response){
