@@ -67,8 +67,8 @@ export class App extends React.Component {
     for (var key of formData.entries()) {
       console.log(key[0] + ', ' + key[1]);
   }
-    // let url = "http://localhost:4500/updateRelevance"
-    let url = "https://wikisearcher-app.herokuapp.com/updateRelevance"
+    let url = "http://localhost:4500/updateRelevance"
+    // let url = "https://wikisearcher-app.herokuapp.com/updateRelevance"
     // const proxyurl = "https://cors-anywhere.herokuapp.com/";
     fetch((url), {
       method: 'POST',
@@ -154,8 +154,8 @@ export class App extends React.Component {
       // query_cleaned = query_cleaned.replace(/[^a-zA-Z0-9 ]/g, "%20");
       // query_cleaned = query_cleaned.replace(/\s/g, "%20");
       query_cleaned = escape(query_cleaned);
-      // let url = "http://localhost:4500/wiki/search?q="+ query_cleaned
-      let url = "https://wikisearcher-app.herokuapp.com/search?q=" + query_cleaned
+      let url = "http://localhost:4500/wiki/search?q="+ query_cleaned
+      // let url = "https://wikisearcher-app.herokuapp.com/search?q=" + query_cleaned
      fetch((url), {
         method: "GET",
         mode : 'cors',
