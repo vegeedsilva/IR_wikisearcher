@@ -4,6 +4,7 @@ import "bootstrap-css-only";
 import "./styles.css";
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import Alert from 'react-bootstrap/Alert';
 import Image from 'react-bootstrap/Image'
 import fetch from 'isomorphic-fetch';
 import { Accordion, AccordionCollapse, AccordionToggle, ListGroup } from "react-bootstrap";
@@ -106,7 +107,7 @@ export class App extends React.Component {
             
             </Card.Text>
             <Button variant="primary" onClick = { () => this.update_score(doc) }>Mark Interesting</Button>
-            {this.state.clickedDoc == doc && <span >Marked</span>}
+            {this.state.clickedDoc == doc && <Alert variant = 'success' >Marked</Alert>}
             {/* {"    "}
             <Button variant="primary" onClick={this.openDocument}>Open document</Button> */}
             </Card.Body>
