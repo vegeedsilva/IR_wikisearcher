@@ -15,7 +15,7 @@ app.use(forms.array());
 
 
 app.get('/*', function(req,res) {
-    request('https://wikisearcher-app.herokuapp.com/' + req.url,
+    request('https://wikisearcher-app.herokuapp.com' + req.url,
    (error, response, body) => {
        console.log(body)
        if (error) {
