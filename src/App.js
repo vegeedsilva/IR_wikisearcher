@@ -74,7 +74,7 @@ export class App extends React.Component {
       method: 'POST',
       formData: {
         doc: {
-            value: (doc),
+            value: JSON.stringify(doc),
             options : {
                 contentType: 'application/json'
             } 
