@@ -72,14 +72,11 @@ export class App extends React.Component {
     let url = "https://wikisearcher-app.herokuapp.com/updateRelevance"
     const proxyurl = "https://cors-anywhere.herokuapp.com/";
     fetch((proxyurl + url), {
-      headers: {'content-type' : 'application/json'},
-      
       method: 'POST',
       // url : (proxyurl+url),
-      json: true,
       formData: {
         doc: {
-            value: JSON.stringify(doc),
+            value: doc,
             options : {
                 contentType: 'application/json'
             } 
