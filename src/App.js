@@ -9,6 +9,7 @@ import Image from 'react-bootstrap/Image'
 import fetch from 'isomorphic-fetch';
 import { Accordion, AccordionCollapse, AccordionToggle, ListGroup } from "react-bootstrap";
 import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
+import { post } from "request";
 
 
 export class App extends React.Component {
@@ -70,8 +71,12 @@ export class App extends React.Component {
     // let url = "http://localhost:4500/updateRelevance"
     let url = "https://wikisearcher-app.herokuapp.com/updateRelevance"
     const proxyurl = "https://cors-anywhere.herokuapp.com/";
-    fetch((proxyurl+url), {
-      method: 'POST',
+    post( {
+      headers: {'content-type' : 'application/json'},
+      
+      // method: 'POST',
+      url : (proxyurl+url),
+      json: true,
       formData: {
         doc: {
             value: JSON.stringify(doc),
