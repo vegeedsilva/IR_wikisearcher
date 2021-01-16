@@ -19,8 +19,9 @@ export class App extends React.Component {
       errors: [],
       results:[],
       show_cards:false,
-      result_element:[],
-      no_result: false,
+      docToUpdate:{},
+      clickedDoc:null
+     
       
     };
 
@@ -28,6 +29,7 @@ export class App extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.display_doc = this.display_doc.bind(this);
     this.display_query = this.display_query.bind(this);
+    this.update_score = this.update_score.bind(this)
   
     
     
@@ -47,9 +49,37 @@ export class App extends React.Component {
     this.setState(obj);
     this.state.show_cards = false;
     
+    
   }
 
-  
+  update_score(doc)
+  {
+    // this.setState({docToUpdate:doc});
+    this.setState(Object.assign(this.state.docToUpdate,doc));
+    this.state.clickedDoc = doc;
+    var maxscore = Math.max.apply(Math, this.state.results.map(function(o) { return o.score; }));
+    console.log ('maxscore: ', maxscore,' doc title', this.state.docToUpdate.docTitle) 
+    let formData = new FormData();
+    formData.append("doc" ,  JSON.stringify(doc));
+    formData.append("maxScore" , maxscore);
+
+    for (var key of formData.entries()) {
+      console.log(key[0] + ', ' + key[1]);
+  }
+    let url = "http://localhost:4500/updateRelevance"
+    // const proxyurl = "https://cors-anywhere.herokuapp.com/";
+    fetch((url), {
+      method: 'POST',
+      body: formData,
+    }).then(function(response){
+      console.log(response)
+      return response;
+    }).then(function(response) {
+      console.log(response, "done ");
+
+    })
+
+  }
 
   
   display_doc (doc){
@@ -75,7 +105,8 @@ export class App extends React.Component {
             {ReactHtmlParser(doc.fragments)}
             
             </Card.Text>
-            <Button variant="primary">Mark Interesting</Button>
+            <Button variant="primary" onClick = { () => this.update_score(doc) }>Mark Interesting</Button>
+            {this.state.clickedDoc == doc && <span >Marked</span>}
             {/* {"    "}
             <Button variant="primary" onClick={this.openDocument}>Open document</Button> */}
             </Card.Body>
@@ -115,16 +146,18 @@ export class App extends React.Component {
       
      
       // alert("everything good. submit form!");
-      const proxyurl = "https://cors-anywhere.herokuapp.com/";
+      // const proxyurl = "https://cors-anywhere.herokuapp.com/";
      
       let query_cleaned = this.state.query;
       // query_cleaned = query_cleaned.replace(/[^a-zA-Z0-9 ]/g, "%20");
       // query_cleaned = query_cleaned.replace(/\s/g, "%20");
       query_cleaned = escape(query_cleaned);
       // let url = "http://localhost:4500/wiki/search?q="+ query_cleaned
-      let url = "https://wikisearcher-app.herokuapp.com/search?q=" + query_cleaned
-     fetch((proxyurl+url), {
+      let url = "http://localhost:4500/search?q=" + query_cleaned
+     fetch((url), {
         method: "GET",
+        mode : 'cors',
+       
       }) .then(function(response){
         console.log(response)
         return response.json();
