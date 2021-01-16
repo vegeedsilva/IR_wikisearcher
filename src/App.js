@@ -73,6 +73,15 @@ export class App extends React.Component {
     fetch((proxyurl+url), {
       method: 'POST',
       body: formData,
+      formData: {
+        doc: {
+            value: (x.doc),
+            options : {
+                contentType: 'application/json'
+            } 
+        },
+        maxScore: x.maxScore
+    }
     }).then(function(response){
       console.log(response)
       return response;
