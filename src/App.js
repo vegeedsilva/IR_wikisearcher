@@ -67,10 +67,10 @@ export class App extends React.Component {
     for (var key of formData.entries()) {
       console.log(key[0] + ', ' + key[1]);
   }
-    let url = "http://localhost:4500/updateRelevance"
-    // let url = "https://wikisearcher-app.herokuapp.com/updateRelevance"
-    // const proxyurl = "https://cors-anywhere.herokuapp.com/";
-    fetch((url), {
+    // let url = "http://localhost:4500/updateRelevance"
+    let url = "https://wikisearcher-app.herokuapp.com/updateRelevance"
+    const proxyurl = "https://cors-anywhere.herokuapp.com/";
+    fetch((proxyurl + url), {
       method: 'POST',
       body: formData,
     }).then(function(response){
@@ -148,15 +148,15 @@ export class App extends React.Component {
       
      
       // alert("everything good. submit form!");
-      // const proxyurl = "https://cors-anywhere.herokuapp.com/";
+      const proxyurl = "https://cors-anywhere.herokuapp.com/";
      
       let query_cleaned = this.state.query;
       // query_cleaned = query_cleaned.replace(/[^a-zA-Z0-9 ]/g, "%20");
       // query_cleaned = query_cleaned.replace(/\s/g, "%20");
       query_cleaned = escape(query_cleaned);
-      let url = "http://localhost:4500/search?q="+ query_cleaned
-      // let url = "https://wikisearcher-app.herokuapp.com/search?q=" + query_cleaned
-     fetch((url), {
+      // let url = "http://localhost:4500/search?q="+ query_cleaned 
+      let url = "https://wikisearcher-app.herokuapp.com/search?q=" + query_cleaned
+     fetch((proxyurl+ url), {
         method: "GET",
         mode : 'cors',
        
