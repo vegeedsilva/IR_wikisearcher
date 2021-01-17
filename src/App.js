@@ -62,8 +62,10 @@ export class App extends React.Component {
     var maxscore = Math.max.apply(Math, this.state.results.map(function(o) { return o.score; }));
     console.log ('maxscore: ', maxscore,' doc title', this.state.docToUpdate.docTitle) 
     let formData = new FormData();
-    // formData.append("doc" ,  JSON.stringify(doc));
-    // formData.append("maxScore" , maxscore);
+    const doc_updated = JSON.stringify(doc);
+    const blob = new Blob( [doc_updated], {type: 'application/json'})
+    formData.append("doc" ,blob  );
+    formData.append("maxScore" , maxscore);
 
     for (var key of formData.entries()) {
       console.log(key[0] + ', ' + key[1]);
@@ -73,17 +75,18 @@ export class App extends React.Component {
     const proxyurl = "https://cors-anywhere.herokuapp.com/";
     fetch((proxyurl + url), {
       method: 'POST',
+      body: formData,
       // url : (proxyurl+url),
-      formData: {
-        doc: {
-            value: doc,
-            options : {
-                contentType: 'application/json'
-            } 
-        },
-        maxScore: maxscore
-    },
-    body: formData,
+    //   formData: {
+    //     doc: {
+    //         value: doc,
+    //         options : {
+    //             contentType: 'application/json'
+    //         } 
+    //     },
+    //     maxScore: maxscore
+    // },
+   
     }).then(function(response){
       console.log(response)
       return response;
